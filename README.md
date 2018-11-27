@@ -1,2 +1,2 @@
 # fluffy-enigma
-A Docbook to Mendeley citations API
+A Docbook to Mendeley bibliography maven plugin
