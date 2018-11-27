@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/product.schema.json",
+  "title": "Identifier Type",
+  "description": "A document that is stored in a Mendeley user's library.",
+  "type": "object",
+  "properties": {
+    "profile_id": {
+      "description": "",
+      "type": "string"
+    }
+  },
+  "required": [ "title"]
+}
