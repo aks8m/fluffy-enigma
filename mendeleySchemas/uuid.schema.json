@@ -1,14 +1,18 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "http://example.com/product.schema.json",
+  "$id": "https://raw.githubusercontent.com/aks8m/fluffy-enigma/master/mendeleySchemas/uuid.schema.json",
   "title": "UUID",
   "description": "A document that is stored in a Mendeley user's library.",
   "type": "object",
   "properties": {
-    "profile_id": {
+    "leastSignificantBits": {
       "description": "",
-      "type": "string"
+      "type": "integer"
+    },
+    "mostSignificantBits": {
+      "description": "",
+      "type": "integer"
     }
   },
-  "required": [ "title"]
+  "required": []
 }

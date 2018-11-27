@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "http://example.com/product.schema.json",
+  "$id": "https://raw.githubusercontent.com/aks8m/fluffy-enigma/master/mendeleySchemas/user.document.schema.json",
   "title": "MendeleyDocument",
   "description": "A document that is stored in a Mendeley user's library.",
   "type": "object",
@@ -78,7 +78,7 @@
       "description": "",
       "type": "array",
       "person": {
-        "$ref": "https://example.com/geographical-location.schema.json"
+        "$ref": "https://raw.githubusercontent.com/aks8m/fluffy-enigma/master/mendeleySchemas/person.schema.json"
       },
       "minItems": 1,
       "uniqueItems": false
@@ -119,7 +119,7 @@
       "description": "",
       "type": "array",
       "uuid": {
-        "$ref": "https://example.com/geographical-location.schema.json"
+        "$ref": "https://raw.githubusercontent.com/aks8m/fluffy-enigma/master/mendeleySchemas/uuid.schema.json"
       },
       "minItems": 1,
       "uniqueItems": false
@@ -184,7 +184,7 @@
       "description": "",
       "type": "array",
       "person": {
-        "$ref": "https://example.com/geographical-location.schema.json"
+        "$ref": "https://raw.githubusercontent.com/aks8m/fluffy-enigma/master/mendeleySchemas/person.schema.json"
       },
       "minItems": 1,
       "uniqueItems": false
@@ -247,7 +247,7 @@
       "description": "",
       "type": "array",
       "person": {
-        "$ref": "https://example.com/geographical-location.schema.json"
+        "$ref": "https://raw.githubusercontent.com/aks8m/fluffy-enigma/master/mendeleySchemas/person.schema.json"
       },
       "minItems": 1,
       "uniqueItems": false
@@ -260,7 +260,7 @@
       "description": "",
       "type": "object",
       "properties": {
-        "identifierType": { "$ref": "https://example.com/geographical-location.schema.json" },
+        "identifierType": { "$ref": "https://raw.githubusercontent.com/aks8m/fluffy-enigma/master/mendeleySchemas/identifier.type.schema.json" },
         "identifier":     { "type": "string" }
       }
     },
@@ -268,12 +268,12 @@
       "description": "",
       "type": "object",
       "properties": {
-        "identifierType": { "$ref": "https://example.com/geographical-location.schema.json" },
-        "identifier":     { "type": "string" }
+        "documentType": { "$ref": "https://raw.githubusercontent.com/aks8m/fluffy-enigma/master/mendeleySchemas/document.type.schema.json" },
+        "type":     { "type": "string" }
       }
     }
   },
-  "required": [ "title"]
+  "required": ["title"]
 }
 
 
