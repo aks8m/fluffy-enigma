@@ -1,18 +1,21 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/aks8m/fluffy-enigma/master/mendeleySchemas/document.type.schema.json",
+  "$id": "https://raw.githubusercontent.com/aks8m/fluffy-enigma/master/mendeleySchemas/documents.schema.json",
   "title": "Documents",
   "description": "A document that is stored in a Mendeley user's library.",
   "type": "object",
   "properties": {
-    "description": {
+    "documents": {
       "description": "",
-      "type": "string"
-    },
-    "name": {
-      "description": "",
-      "type": "string"
+      "type": "array",
+      "document": {
+        "$ref": "https://raw.githubusercontent.com/aks8m/fluffy-enigma/master/mendeleySchemas/user.document.schema.json"
+      },
+      "minItems": 1,
+      "uniqueItems": false
     }
   },
   "required": []
 }
+
+    
