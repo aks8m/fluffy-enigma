@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/aks8m/fluffy-enigma/master/mendeleySchemas/document.type.schema.json",
+  "title": "Documents",
+  "description": "A document that is stored in a Mendeley user's library.",
+  "type": "object",
+  "properties": {
+    "description": {
+      "description": "",
+      "type": "string"
+    },
+    "name": {
+      "description": "",
+      "type": "string"
+    }
+  },
+  "required": []
+}
