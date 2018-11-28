@@ -1,10 +1,9 @@
 package com.github.aks8m.plugin.client;
 
-import com.github.aks8m.plugin.MendeleyDocument;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.github.aks8m.schemas.mendeley.UserDocument;
+import com.github.aks8m.schemas.mendeley.UserDocuments;
+import com.google.gson.*;
+import com.google.gson.stream.JsonReader;
 import org.apache.http.auth.AuthenticationException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -17,6 +16,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MendeleyClient {
@@ -41,10 +41,9 @@ public class MendeleyClient {
         }
     }
 
-    public List<MendeleyDocument> getListOfUserDocuments(){
+    public List<UserDocument> getListOfUserDocuments(){
 
-        JsonArray arrayOfJsonDocuments = null;
-        ArrayList<MendeleyDocument> mendeleyDocuments = new ArrayList<>();
+        ArrayList<UserDocument> userDocuments = new ArrayList<>();
 
         try {
             CloseableHttpClient client = HttpClients.createDefault();
@@ -59,10 +58,12 @@ public class MendeleyClient {
 
             CloseableHttpResponse response = client.execute(httpGet);
 
-            JsonElement jsonElement = new JsonParser().parse(EntityUtils.toString(response.getEntity()));
+            String json = EntityUtils.toString(response.getEntity());
 
-            if(jsonElement.isJsonArray())
-                arrayOfJsonDocuments = jsonElement.getAsJsonArray();
+            UserDocument[] documents = new Gson().fromJson(json, UserDocument[].class);
+
+            userDocuments.addAll(Arrays.asList(documents));
+
 
             client.close();
 
@@ -70,17 +71,8 @@ public class MendeleyClient {
             exception.printStackTrace();
         }
 
-        for(int i = 0; i < arrayOfJsonDocuments.size(); i++){
-            JsonElement documentElement = arrayOfJsonDocuments.get(i);
 
-            if(documentElement.isJsonObject()){
-                JsonObject documentObject = documentElement.getAsJsonObject();
-                mendeleyDocuments.add(new MendeleyDocument(documentObject.get("id").getAsString(),
-                        documentObject.get("title").getAsString()));
-            }
-        }
-
-        return mendeleyDocuments;
+        return userDocuments;
     }
 
 }
