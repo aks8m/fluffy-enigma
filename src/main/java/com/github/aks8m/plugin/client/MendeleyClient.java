@@ -1,9 +1,7 @@
 package com.github.aks8m.plugin.client;
 
 import com.github.aks8m.schemas.mendeley.UserDocument;
-import com.github.aks8m.schemas.mendeley.UserDocuments;
-import com.google.gson.*;
-import com.google.gson.stream.JsonReader;
+import com.google.gson.Gson;
 import org.apache.http.auth.AuthenticationException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -17,9 +15,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-public class MendeleyClient {
+class MendeleyClient {
 
     private final MendeleyOAuth2 mendeleyOAuth2;
 
@@ -41,7 +38,7 @@ public class MendeleyClient {
         }
     }
 
-    public List<UserDocument> getListOfUserDocuments(){
+    public ArrayList<UserDocument> generateDocbookBibliography(){
 
         ArrayList<UserDocument> userDocuments = new ArrayList<>();
 
@@ -59,18 +56,13 @@ public class MendeleyClient {
             CloseableHttpResponse response = client.execute(httpGet);
 
             String json = EntityUtils.toString(response.getEntity());
-
-            UserDocument[] documents = new Gson().fromJson(json, UserDocument[].class);
-
-            userDocuments.addAll(Arrays.asList(documents));
-
+            userDocuments.addAll(Arrays.asList(new Gson().fromJson(json, UserDocument[].class)));
 
             client.close();
 
         }catch (IOException | URISyntaxException  exception){
             exception.printStackTrace();
         }
-
 
         return userDocuments;
     }
