@@ -45,7 +45,7 @@ public class UserDocument {
      */
     @SerializedName("tags")
     @Expose
-    private List<Object> tags = new ArrayList<Object>();
+    private List<String> tags = new ArrayList<String>();
     /**
      * 
      * 
@@ -405,6 +405,7 @@ public class UserDocument {
     @Expose
     private String type;
 
+
     /**
      * 
      * 
@@ -414,7 +415,7 @@ public class UserDocument {
     }
 
     /**
-     * 
+     *
      * 
      */
     public void setProfileId(String profileId) {
@@ -457,7 +458,7 @@ public class UserDocument {
      * 
      * 
      */
-    public List<Object> getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
@@ -465,7 +466,7 @@ public class UserDocument {
      * 
      * 
      */
-    public void setTags(List<Object> tags) {
+    public void setTags(List<String> tags) {
         this.tags = tags;
     }
 
@@ -1286,6 +1287,7 @@ public class UserDocument {
     public void setType(String type) {
         this.type = type;
     }
+
 
     @Override
     public String toString() {

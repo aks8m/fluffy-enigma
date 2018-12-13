@@ -11,15 +11,19 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class BibliographyUtility {
 
     private final MendeleyClient mendeleyClient;
     private final String bibliographyFilePath;
+    private final String tagName;
 
-    public BibliographyUtility(String bibliographyFilePath) {
+
+    public BibliographyUtility(String bibliographyFilePath, String groupId, String tagName, String secret, String client_id, String username, String password, String redirect_uri) {
         this.bibliographyFilePath = bibliographyFilePath;
-        this.mendeleyClient = new MendeleyClient();
+        this.mendeleyClient = new MendeleyClient(groupId, secret, client_id, username, password, redirect_uri);
+        this.tagName = tagName;
     }
 
     public void writeBibliography(){
@@ -74,6 +78,9 @@ public class BibliographyUtility {
         final Title biblioentryTitle = new Title();
 
         biblioentry.getAbstractsAndAddressesAndArtpagenums()
+                .add(createAbbrev(userDocument.getTags().stream().filter(s -> s.toString().startsWith(tagName)).findFirst().get().replace(tagName + "=", "")));
+
+        biblioentry.getAbstractsAndAddressesAndArtpagenums()
                 .add(createAuthorgroup(userDocument.getAuthors()));
 
         biblioentry.getAbstractsAndAddressesAndArtpagenums()
@@ -121,6 +128,14 @@ public class BibliographyUtility {
         copyright.getYears().add(year);
 
         return copyright;
+    }
+
+    private Abbrev createAbbrev(String abbrevString) {
+        final Abbrev abbrev = new Abbrev();
+
+        abbrev.getContent().add(abbrevString);
+
+        return abbrev;
     }
 
     private ArrayList<Biblioid> createBiblioids(Map<String, String> identifiers){

@@ -19,16 +19,20 @@ import java.util.Arrays;
 class MendeleyClient {
 
     private final MendeleyOAuth2 mendeleyOAuth2;
+    private final String groupId;
 
-    public MendeleyClient() {
-        this.mendeleyOAuth2 = new MendeleyOAuth2(System.getProperty("client_id"),
-                System.getProperty("redirect_uri"),
-                System.getProperty("username"),
-                System.getProperty("password"),
-                System.getProperty("secret"));
+    public MendeleyClient(String groupId, String secret, String client_id, String username, String password, String redirect_uri) {
+//        this.mendeleyOAuth2 = new MendeleyOAuth2(System.getProperty("client_id"),
+//                System.getProperty("redirect_uri"),
+//                System.getProperty("username"),
+//                System.getProperty("password"),
+//                System.getProperty("secret"));
+        this.mendeleyOAuth2 = new MendeleyOAuth2(client_id, redirect_uri, username, password, secret);
+        this.groupId = groupId;
 
         authenticate();
     }
+
 
     private void authenticate() {
         try {
@@ -48,10 +52,11 @@ class MendeleyClient {
                     .setScheme("https")
                     .setHost("api.mendeley.com")
                     .setPath("/documents")
+                    .setParameter("view", "all")
+                    .setParameter("group_id", groupId)
                     .build();
             HttpGet httpGet = new HttpGet(uri);
             httpGet.setHeader("Authorization", "Bearer " + this.mendeleyOAuth2.getAccess_token());
-            httpGet.setURI(uri);
 
             CloseableHttpResponse response = client.execute(httpGet);
 
