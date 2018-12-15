@@ -13,6 +13,7 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -60,7 +61,7 @@ class MendeleyClient {
 
             CloseableHttpResponse response = client.execute(httpGet);
 
-            String json = EntityUtils.toString(response.getEntity());
+            String json = EntityUtils.toString(response.getEntity(), Charset.forName("UTF-8"));
             userDocuments.addAll(Arrays.asList(new Gson().fromJson(json, UserDocument[].class)));
 
             client.close();
