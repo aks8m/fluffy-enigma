@@ -11,7 +11,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class BibliographyUtility {
 
@@ -73,12 +72,18 @@ public class BibliographyUtility {
         return bibliography;
     }
 
+    private String getTagUUID(UserDocument userDocument) {
+        return userDocument.getTags().stream().filter(s -> s.toString().startsWith(tagName)).findFirst().get().replace(tagName + "=", "");
+    }
+
     private Biblioentry createBiblioentry(UserDocument userDocument){
         final Biblioentry biblioentry = new Biblioentry();
         final Title biblioentryTitle = new Title();
 
         biblioentry.getAbstractsAndAddressesAndArtpagenums()
-                .add(createAbbrev(userDocument.getTags().stream().filter(s -> s.toString().startsWith(tagName)).findFirst().get().replace(tagName + "=", "")));
+                .add(createAbbrev(getTagUUID(userDocument)));
+
+        biblioentry.setId(getTagUUID(userDocument));
 
         biblioentry.getAbstractsAndAddressesAndArtpagenums()
                 .add(createAuthorgroup(userDocument.getAuthors()));
