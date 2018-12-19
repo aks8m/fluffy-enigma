@@ -23,11 +23,6 @@ class MendeleyClient {
     private final String groupId;
 
     public MendeleyClient(String groupId, String secret, String client_id, String username, String password, String redirect_uri) {
-//        this.mendeleyOAuth2 = new MendeleyOAuth2(System.getProperty("client_id"),
-//                System.getProperty("redirect_uri"),
-//                System.getProperty("username"),
-//                System.getProperty("password"),
-//                System.getProperty("secret"));
         this.mendeleyOAuth2 = new MendeleyOAuth2(client_id, redirect_uri, username, password, secret);
         this.groupId = groupId;
 

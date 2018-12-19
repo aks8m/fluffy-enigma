@@ -103,30 +103,6 @@
     </pluginManagement>
     <plugins>
       <plugin>
-        <groupId>com.github.aks8m</groupId>
-        <artifactId>fluffy-enigma</artifactId>
-        <version>1.0</version>
-        <executions>
-          <execution>
-            <id>GenerateBibliography</id>
-            <phase>validate</phase>
-            <configuration>
-              <directoryPath>/Users/asills/code/fluffy-enigma/bibliography.xml</directoryPath>
-              <groupId>6a7d8e08-17f7-3886-a641-e1d56243e28f</groupId>
-              <tagName>solor.abbrev</tagName>
-              <username>${username}</username>
-              <password>${password}</password>
-              <redirect_uri>${redirect_uri}</redirect_uri>
-              <secret>${secret}</secret>
-              <client_id>${client_id}</client_id>
-            </configuration>
-            <goals>
-              <goal>generatebibliography</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-plugin-plugin</artifactId>
           <version>3.4</version>
@@ -137,18 +113,42 @@
         <version>1.0.0</version>
         <executions>
           <execution>
-            <phase>initialize</phase>
+            <phase>validate</phase>
             <goals>
               <goal>read-project-properties</goal>
             </goals>
             <configuration>
               <files>
-                <file>/Users/asills/devops/fluffy-enigma/mendeleyclient.properties</file>
+                <file>mendeleyclient.properties</file>
               </files>
             </configuration>
           </execution>
         </executions>
       </plugin>
+        <plugin>
+            <groupId>com.github.aks8m</groupId>
+            <artifactId>fluffy-enigma</artifactId>
+            <version>1.0</version>
+            <executions>
+                <execution>
+                    <id>GenerateBibliography</id>
+                    <phase>validate</phase>
+                    <configuration>
+                        <directoryPath>bibliography.xml</directoryPath>
+                        <groupId>6a7d8e08-17f7-3886-a641-e1d56243e28f</groupId>
+                        <tagName>solor.abbrev</tagName>
+                        <username>${username}</username>
+                        <password>${password}</password>
+                        <redirect_uri>${redirect_uri}</redirect_uri>
+                        <secret>${secret}</secret>
+                        <client_id>${client_id}</client_id>
+                    </configuration>
+                    <goals>
+                        <goal>generatebibliography</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
     </plugins>
   </build>
 </project>
